@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Category:</strong>
   <%= @category.name %>
 </p>
+<%= link_to 'Edit', edit_category_path(@category) %> | <%= link_to 'Back', categories_path %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+
+<h4>Subcategories</h4>
+<ul>
+  <% @category.subcategories.each do |subcategory| %>
+    <li>
+      <%= subcategory.name%> 
+      | <%= link_to 'Edit', edit_category_subcategory_path(@category, subcategory) %> | 
+      <%= link_to 'Destroy', [@category, subcategory], method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  <% end %>
+</ul>
+
+ <%= link_to "New Subcategory", new_category_subcategory_path(@category), class: "new" %>
+
